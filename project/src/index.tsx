@@ -6,8 +6,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+const LIST_ITEMS_COUNT = 5;
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App listItemsCount={LIST_ITEMS_COUNT} />
   </React.StrictMode>,
 );
