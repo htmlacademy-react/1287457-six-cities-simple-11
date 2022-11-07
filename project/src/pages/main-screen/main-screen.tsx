@@ -1,11 +1,12 @@
-import ListItem from '../../components/listitem/listitem';
+import List from '../../components/list/list';
 import Header from '../../components/header/header';
+import {OfferType} from '../../types/offers';
 
 type MainScreenProps = {
-  listItemsCount: number;
+  offers: OfferType[];
 }
 
-function MainScreen({listItemsCount}: MainScreenProps): JSX.Element {
+function MainScreen({offers}: MainScreenProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -68,9 +69,7 @@ function MainScreen({listItemsCount}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {Array(listItemsCount).fill(<ListItem />)}
-              </div>
+              <List offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

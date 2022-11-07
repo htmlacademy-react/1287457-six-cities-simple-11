@@ -1,31 +1,45 @@
-function ListItem(): JSX.Element {
+import {OfferType} from '../../types/offers';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+import {formatRating} from '../../common';
+
+type ListItemProps = {
+  offer: OfferType;
+  mouseOverHandler: (offer: OfferType) => void;
+}
+
+function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
+  const {id, isPremium, mainImage, price, rating, name, type} = offer;
+
   return (
-    <article className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+    <article key={id} className="cities__card place-card" onMouseOver={() => mouseOverHandler(offer)}>
+      {isPremium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
-        </a>
+        <Link to={`${AppRoute.Offer}/${id}`}>
+          <img className="place-card__image" src={mainImage} width="260" height="200" alt="Place image" />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;120</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: formatRating(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+          <Link to={`${AppRoute.Offer}/${id}`}>{name}</Link>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
