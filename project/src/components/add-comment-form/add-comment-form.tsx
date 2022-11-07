@@ -1,16 +1,18 @@
-import {useState, ChangeEvent, Fragment} from 'react';
+import {useState, ChangeEvent} from 'react';
+import RatingStar from '../../components/rating-star/rating-star';
+import {addSIfNeeded} from '../../common';
 
 function AddCommentForm(): JSX.Element {
+  const MIN_REVIEW_LENGTH = 50;
+
   const [formData, setFormData] = useState({
     rating: 0,
     review: '',
-    isDisabled: true,
   });
 
-  const changeHandle = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const changeHandler = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = evt.target;
     setFormData({...formData, [name]: value});
-    {/* Вопрос: у нас есть кнопка submit, у которой должен появляться/убираться disabled в зависимости от того, есть ли отмеченный рейтинг и текст отзыва не менее 50 символов. Как реализовать эти проверки? */}
   };
 
   const ratingTitles: string[] = [
@@ -28,23 +30,16 @@ function AddCommentForm(): JSX.Element {
         {ratingTitles.map((title, index, array) => {
           const value = array.length - index;
           return (
-            <Fragment key={value}>
-              <input className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}-stars`} type="radio" onChange={changeHandle}/>
-              <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
-                <svg className="form__star-image" width="37" height="33">
-                  <use xlinkHref="#icon-star"></use>
-                </svg>
-              </label>
-            </Fragment>
+            <RatingStar key={value} value={value} title={title} changeHandler={changeHandler} />
           );
         })}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={changeHandle} value={formData.review}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={changeHandler} value={formData.review}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} {addSIfNeeded(MIN_REVIEW_LENGTH, 'character')}</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={formData.isDisabled}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={formData.review.length < MIN_REVIEW_LENGTH || !formData.rating}>Submit</button>
       </div>
     </form>
   );

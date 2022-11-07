@@ -4,7 +4,8 @@ import {OfferType} from '../../types/offers';
 import {ReviewType} from '../../types/review';
 import Page404Screen from '../../pages/page404-screen/page404-screen';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
-import {formatRating, addSIfNeeded, formatDate} from '../../common';
+import Review from '../../components/review/review';
+import {formatRating, addSIfNeeded} from '../../common';
 
 type OfferProps = {
   offers: OfferType[];
@@ -36,7 +37,7 @@ function OfferScreen({offers, reviews}: OfferProps): JSX.Element {
                   </div>
                 ))}
               </div>
-              : ''}
+              : null}
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
@@ -44,7 +45,7 @@ function OfferScreen({offers, reviews}: OfferProps): JSX.Element {
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
-                : ''}
+                : null}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {name}
@@ -83,7 +84,7 @@ function OfferScreen({offers, reviews}: OfferProps): JSX.Element {
                     ))}
                   </ul>
                 </div>
-                : ''}
+                : null}
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
@@ -104,31 +105,10 @@ function OfferScreen({offers, reviews}: OfferProps): JSX.Element {
                 {offerReviews ?
                   <ul className="reviews__list">
                     {offerReviews.map((review) => (
-                      <li className="reviews__item" key={review.id}>
-                        <div className="reviews__user user">
-                          <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                            <img className="reviews__avatar user__avatar" src={review.user.avatar} width="54" height="54" alt="Reviews avatar" />
-                          </div>
-                          <span className="reviews__user-name">
-                            {review.user.name}
-                          </span>
-                        </div>
-                        <div className="reviews__info">
-                          <div className="reviews__rating rating">
-                            <div className="reviews__stars rating__stars">
-                              <span style={{width: formatRating(review.rating)}}></span>
-                              <span className="visually-hidden">Rating</span>
-                            </div>
-                          </div>
-                          <p className="reviews__text">
-                            {review.comment}
-                          </p>
-                          <time className="reviews__time" dateTime={review.date}>{formatDate(review.date)}</time>
-                        </div>
-                      </li>
+                      <Review key={review.id} review={review} />
                     ))}
                   </ul>
-                  : ''}
+                  : null}
                 <AddCommentForm />
               </section>
             </div>

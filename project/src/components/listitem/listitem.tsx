@@ -17,7 +17,7 @@ function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
-        : ''}
+        : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img className="place-card__image" src={mainImage} width="260" height="200" alt="Place image" />

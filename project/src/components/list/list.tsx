@@ -7,7 +7,7 @@ type ListProps = {
 }
 
 function List({offers}: ListProps): JSX.Element {
-  const setActiveOffer = useState({})[1];
+  const [, setActiveOffer] = useState({});
   const handleActiveOffer = (offer: OfferType): void => {
     setActiveOffer(offer);
   };
