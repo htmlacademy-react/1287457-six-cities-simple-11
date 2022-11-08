@@ -4,6 +4,11 @@ export type HostType = {
   avatar: string;
 }
 
+export type CoordsType = {
+  lat: number;
+  lon: number;
+}
+
 export type OfferType = {
   id: number;
   isPremium: boolean;
@@ -18,4 +23,5 @@ export type OfferType = {
   host: HostType;
   description: string;
   images: string[];
+  coords: CoordsType;
 }
