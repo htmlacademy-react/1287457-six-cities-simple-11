@@ -24,7 +24,11 @@ export const offers: OfferType[] = [
                     An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
                   </p>
                   `,
-    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg']
+    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
+    coords: {
+      lat: 52.3909553943508,
+      lon: 4.85309666406198,
+    }
   },
   {
     id: 2,
@@ -46,7 +50,11 @@ export const offers: OfferType[] = [
                     Some text
                   </p>
                   `,
-    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg']
+    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg'],
+    coords: {
+      lat: 52.3609553943508,
+      lon: 4.85309666406198,
+    }
   },
   {
     id: 3,
@@ -68,7 +76,11 @@ export const offers: OfferType[] = [
                     A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
                   </p>
                   `,
-    images: ['img/room.jpg']
+    images: ['img/room.jpg'],
+    coords: {
+      lat: 52.3909553943508,
+      lon: 4.929309666406198,
+    },
   },
   {
     id: 4,
@@ -93,6 +105,10 @@ export const offers: OfferType[] = [
                     An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
                   </p>
                   `,
-    images: ['img/studio-01.jpg', 'img/apartment-01.jpg']
+    images: ['img/studio-01.jpg', 'img/apartment-01.jpg'],
+    coords: {
+      lat: 52.3809553943508,
+      lon: 4.939309666406198,
+    }
   }
 ];

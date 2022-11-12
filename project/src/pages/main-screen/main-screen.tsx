@@ -1,12 +1,19 @@
 import List from '../../components/list/list';
 import Header from '../../components/header/header';
+import Map from '../../components/map/map';
 import {OfferType} from '../../types/offers';
+import {city} from '../../mocks/city';
+import {useState} from 'react';
 
 type MainScreenProps = {
   offers: OfferType[];
 }
 
 function MainScreen({offers}: MainScreenProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<OfferType| undefined>(undefined);
+  const handleActiveOffer = (offer: OfferType): void => {
+    setActiveOffer(offer);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -69,10 +76,10 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <List offers={offers} />
+              <List offers={offers} mouseOverHandler={handleActiveOffer} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={city} points={offers} activeOffer={activeOffer} />
             </div>
           </div>
         </div>
