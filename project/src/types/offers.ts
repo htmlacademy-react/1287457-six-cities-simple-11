@@ -24,4 +24,5 @@ export type OfferType = {
   description: string;
   images: string[];
   coords: CoordsType;
+  city: string;
 }

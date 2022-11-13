@@ -5,14 +5,14 @@ import {formatRating} from '../../common';
 
 type ListItemProps = {
   offer: OfferType;
-  mouseOverHandler: (offer: OfferType) => void;
+  mouseOverHandler: (offer: OfferType | undefined) => void;
 }
 
 function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
   const {id, isPremium, mainImage, price, rating, name, type} = offer;
 
   return (
-    <article key={id} className="cities__card place-card" onMouseOver={() => mouseOverHandler(offer)}>
+    <article key={id} className="cities__card place-card" onMouseOver={() => mouseOverHandler(offer)} onMouseOut={() => mouseOverHandler(undefined)}>
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>

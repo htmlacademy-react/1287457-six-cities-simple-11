@@ -3,7 +3,7 @@ import {OfferType} from '../../types/offers';
 
 type ListProps = {
   offers: OfferType[];
-  mouseOverHandler: (offer: OfferType) => void;
+  mouseOverHandler: (offer: OfferType | undefined) => void;
 }
 
 function List({offers, mouseOverHandler}: ListProps): JSX.Element {
