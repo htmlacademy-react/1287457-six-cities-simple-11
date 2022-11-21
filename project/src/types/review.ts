@@ -1,13 +1,13 @@
-export type UserType = {
+export type TUser = {
   name: string;
   avatar: string;
 }
 
-export type ReviewType = {
+export type TReview = {
   id: number;
   offerId: number;
   comment: string;
   date: string;
   rating: number;
-  user: UserType;
+  user: TUser;
 }

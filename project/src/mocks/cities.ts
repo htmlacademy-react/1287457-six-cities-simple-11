@@ -1,13 +1,13 @@
-import {CityType} from '../types/city';
+import {TCity} from '../types/city';
 
-export const defaultCity: CityType = {
+export const defaultCity: TCity = {
   name: 'Amsterdam',
   zoom: 10,
   lat: 52.37022,
   lon: 4.89517,
 };
 
-export const cities: CityType[] = [
+export const cities: TCity[] = [
   {
     name: 'Paris',
     zoom: 10,

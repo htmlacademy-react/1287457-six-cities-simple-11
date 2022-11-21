@@ -4,10 +4,10 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import Page404Screen from '../../pages/page404-screen/page404-screen';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {ReviewType} from '../../types/review';
+import {TReview} from '../../types/review';
 
 type AppProps = {
-  reviews: ReviewType[];
+  reviews: TReview[];
 }
 
 function App({reviews}: AppProps): JSX.Element {

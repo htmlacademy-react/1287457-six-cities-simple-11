@@ -1,18 +1,18 @@
-import {OfferType} from '../../types/offers';
+import {TOffer} from '../../types/offers';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {formatRating} from '../../common';
 
 type ListItemProps = {
-  offer: OfferType;
-  mouseOverHandler: (offer: OfferType | undefined) => void;
+  offer: TOffer;
+  mouseOverHandler: (offer?: TOffer) => void;
 }
 
 function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
   const {id, isPremium, mainImage, price, rating, name, type} = offer;
 
   return (
-    <article key={id} className="cities__card place-card" onMouseOver={() => mouseOverHandler(offer)} onMouseOut={() => mouseOverHandler(undefined)}>
+    <article key={id} className="cities__card place-card" onMouseOver={() => mouseOverHandler(offer)} onMouseOut={() => mouseOverHandler()}>
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>

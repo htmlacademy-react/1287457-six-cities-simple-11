@@ -1,10 +1,10 @@
 import {useEffect, useRef} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {CityType} from '../../types/city';
+import {TCity} from '../../types/city';
 import useMap from '../../hooks/useMap';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
-import {OfferType} from '../../types/offers';
+import {TOffer} from '../../types/offers';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: URL_MARKER_DEFAULT,
@@ -19,9 +19,9 @@ const activeCustomIcon = leaflet.icon({
 });
 
 type MapProps = {
-  points: OfferType[];
-  city: CityType;
-  activeOffer?: OfferType;
+  points: TOffer[];
+  city: TCity;
+  activeOffer?: TOffer;
 }
 
 function Map({points, city, activeOffer}: MapProps): JSX.Element {
@@ -43,6 +43,12 @@ function Map({points, city, activeOffer}: MapProps): JSX.Element {
       });
     }
   }, [map, points, activeOffer]);
+
+  useEffect(() => {
+    if (map) {
+      map.flyTo({lat: city.lat, lng: city.lon});
+    }
+  }, [city]);
 
   return (
     <section

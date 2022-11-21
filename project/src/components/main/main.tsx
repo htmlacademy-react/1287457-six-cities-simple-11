@@ -1,18 +1,18 @@
 import List from '../../components/list/list';
 import Map from '../../components/map/map';
 import {useState} from 'react';
-import {OfferType} from '../../types/offers';
+import {TOffer} from '../../types/offers';
 import {addSIfNeeded} from '../../common';
-import {CityType} from '../../types/city';
+import {TCity} from '../../types/city';
 
 type MainProps = {
-  city: CityType;
-  offers: OfferType[];
+  city: TCity;
+  offers: TOffer[];
 }
 
 function Main({city, offers}: MainProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<OfferType| undefined>(undefined);
-  const handleActiveOffer = (offer: OfferType | undefined): void => {
+  const [activeOffer, setActiveOffer] = useState<TOffer| undefined>();
+  const handleActiveOffer = (offer: TOffer | undefined): void => {
     setActiveOffer(offer);
   };
 

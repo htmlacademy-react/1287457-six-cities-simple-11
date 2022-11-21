@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import {useParams} from 'react-router-dom';
-import {OfferType} from '../../types/offers';
-import {ReviewType} from '../../types/review';
+import {TOffer} from '../../types/offers';
+import {TReview} from '../../types/review';
 import Page404Screen from '../../pages/page404-screen/page404-screen';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import Review from '../../components/review/review';
@@ -9,12 +9,12 @@ import {formatRating, addSIfNeeded} from '../../common';
 import {useAppSelector} from '../../hooks/index';
 
 type OfferProps = {
-  reviews: ReviewType[];
+  reviews: TReview[];
 }
 
 function OfferScreen({reviews}: OfferProps): JSX.Element {
   const params = useParams();
-  const offers: OfferType[] = useAppSelector((state) => state.offers);
+  const offers: TOffer[] = useAppSelector((state) => state.offers);
   const offer = offers.find((item) => item.id.toString() === params.id);
   if (!offer) {
     return <Page404Screen />;

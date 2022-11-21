@@ -1,4 +1,4 @@
-export type CityType = {
+export type TCity = {
   name: string;
   zoom: number;
   lat: number;
