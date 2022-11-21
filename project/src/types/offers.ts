@@ -1,15 +1,15 @@
-export type HostType = {
+export type THost = {
   name: string;
   status: string;
   avatar: string;
 }
 
-export type CoordsType = {
+export type TCoords = {
   lat: number;
   lon: number;
 }
 
-export type OfferType = {
+export type TOffer = {
   id: number;
   isPremium: boolean;
   mainImage: string;
@@ -20,8 +20,9 @@ export type OfferType = {
   bedrooms: number;
   maxAdults: number;
   inside: string[];
-  host: HostType;
+  host: THost;
   description: string;
   images: string[];
-  coords: CoordsType;
+  coords: TCoords;
+  city: string;
 }

@@ -1,9 +1,9 @@
 import ListItem from '../../components/listitem/listitem';
-import {OfferType} from '../../types/offers';
+import {TOffer} from '../../types/offers';
 
 type ListProps = {
-  offers: OfferType[];
-  mouseOverHandler: (offer: OfferType) => void;
+  offers: TOffer[];
+  mouseOverHandler: (offer: TOffer | undefined) => void;
 }
 
 function List({offers, mouseOverHandler}: ListProps): JSX.Element {

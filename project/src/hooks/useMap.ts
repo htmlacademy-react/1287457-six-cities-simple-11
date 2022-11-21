@@ -1,11 +1,11 @@
 import {useRef, useEffect, useState, MutableRefObject} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {CityProps} from '../mocks/city';
+import {TCity} from '../types/city';
 import {Map} from 'leaflet';
 import {LEAFLET_TILE_LAYER, LEAFLET_COPYRIGHT} from '../const';
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityProps) {
+function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: TCity) {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
   const {lat, lon, zoom} = city;

@@ -1,8 +1,8 @@
 import {formatRating, formatDate} from '../../common';
-import {ReviewType} from '../../types/review';
+import {TReview} from '../../types/review';
 
 type ReviewProps = {
-  review: ReviewType;
+  review: TReview;
 }
 
 function Review({review}: ReviewProps): JSX.Element {
