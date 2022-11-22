@@ -20,7 +20,7 @@ export type TOffer = {
       zoom: number;
     };
     name: string;
-  }
+  };
   description: string;
   goods: [string];
   host: THost;
