@@ -9,7 +9,7 @@ type ListItemProps = {
 }
 
 function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
-  const {id, isPremium, mainImage, price, rating, name, type} = offer;
+  const {id, isPremium, images, price, rating, title, type} = offer;
 
   return (
     <article key={id} className="cities__card place-card" onMouseOver={() => mouseOverHandler(offer)} onMouseOut={() => mouseOverHandler()}>
@@ -20,7 +20,7 @@ function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
         : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`${AppRoute.Offer}/${id}`}>
-          <img className="place-card__image" src={mainImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -37,7 +37,7 @@ function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${id}`}>{name}</Link>
+          <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

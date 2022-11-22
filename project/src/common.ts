@@ -15,5 +15,5 @@ export const formatDate = function(date: string): string {
 };
 
 export const getOffersByCity = function(city: string, offers: TOffer[]): TOffer[] {
-  return offers.filter((item) => item.city === city);
+  return offers.filter((item) => item.city.name === city);
 };
