@@ -8,7 +8,7 @@ import {useAppSelector} from '../../hooks/index';
 
 function MainScreen(): JSX.Element {
   const city: TCity = useAppSelector((state) => state.city);
-  const offers: TOffer[] = useAppSelector((state) => state.offers);
+  const offers: TOffer[] = useAppSelector((state) => state.currentCityOffers);
   const {name: cityName} = city;
 
   return (

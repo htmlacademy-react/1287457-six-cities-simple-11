@@ -1,8 +1,6 @@
 import {MouseEvent} from 'react';
-import {setCity, setOffers} from '../../store/action';
+import {setCity} from '../../store/action';
 import {useAppDispatch} from '../../hooks/index';
-import {getOffersByCity} from '../../common';
-import {offers} from '../../mocks/offers';
 import {TCity} from '../../types/city';
 
 type CitiesListItemProps = {
@@ -17,7 +15,6 @@ function CitiesListItem({city, isActive}: CitiesListItemProps): JSX.Element {
   const handleCityClick = (evt: MouseEvent) => {
     evt.preventDefault();
     dispatch(setCity(city));
-    dispatch(setOffers(getOffersByCity(name, offers)));
   };
 
   return (

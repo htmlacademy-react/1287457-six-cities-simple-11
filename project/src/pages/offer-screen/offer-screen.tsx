@@ -14,13 +14,13 @@ type OfferProps = {
 
 function OfferScreen({reviews}: OfferProps): JSX.Element {
   const params = useParams();
-  const offers: TOffer[] = useAppSelector((state) => state.offers);
+  const offers: TOffer[] = useAppSelector((state) => state.currentCityOffers);
   const offer = offers.find((item) => item.id.toString() === params.id);
   if (!offer) {
     return <Page404Screen />;
   }
-  const {isPremium, price, rating, name, type, bedrooms, maxAdults, images, inside, host, description} = offer;
-  const {name: hostName, avatar, status} = host;
+  const {isPremium, price, rating, title, type, bedrooms, maxAdults, images, goods, host, description} = offer;
+  const {name: hostName, avatarUrl, isPro} = host;
 
   const offerReviews = reviews.filter((item) => item.offerId.toString() === params.id);
   return (
@@ -49,7 +49,7 @@ function OfferScreen({reviews}: OfferProps): JSX.Element {
                 : null}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {name}
+                  {title}
                 </h1>
               </div>
               <div className="property__rating rating">
@@ -74,11 +74,11 @@ function OfferScreen({reviews}: OfferProps): JSX.Element {
                 <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
-              {inside ?
+              {goods ?
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    {inside.map((item) => (
+                    {goods.map((item) => (
                       <li className="property__inside-item" key={item}>
                         {item}
                       </li>
@@ -89,14 +89,14 @@ function OfferScreen({reviews}: OfferProps): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper ${status === 'Pro' ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={avatar} width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper ${isPro ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
+                    <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {hostName}
                   </span>
                   <span className="property__user-status">
-                    {status}
+                    {isPro}
                   </span>
                 </div>
                 <div className="property__description" dangerouslySetInnerHTML={{ __html: description }} />
