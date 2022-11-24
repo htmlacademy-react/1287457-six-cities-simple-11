@@ -4,9 +4,6 @@ import App from './components/app/app';
 import {reviews} from './mocks/reviews';
 import {Provider} from 'react-redux';
 import {store} from './store/index';
-import {loadOffersAction} from './store/api-action';
-
-store.dispatch(loadOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

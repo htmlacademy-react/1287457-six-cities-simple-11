@@ -40,7 +40,6 @@ function Main({city, offers}: MainProps): JSX.Element {
       </section>
       <div className="cities__right-section">
         <Map activeOffer={activeOffer} city={city} points={offers} />
-        {/* Отели есть только в Париже и Амстердаме. Если переключиться между ними напрямую - карта не перерисуется. Если переключиться через какой-нибудь другой город, где точек нет, то карта отобразится правильно. В чем причина? Пробовал передавать city и offers через пропсы, пробовал вытаскивать их внутри компонента Map через useAppSelector (как на странице main-screen) - без разницы, карта не перерисовывается */}
       </div>
     </div>
   );

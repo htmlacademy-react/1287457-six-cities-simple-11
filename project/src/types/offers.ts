@@ -22,10 +22,10 @@ export type TOffer = {
     name: string;
   };
   description: string;
-  goods: [string];
+  goods: string[];
   host: THost;
   id: number;
-  images: [string];
+  images: string[];
   isPremium: boolean;
   location: TLocation;
   maxAdults: number;
