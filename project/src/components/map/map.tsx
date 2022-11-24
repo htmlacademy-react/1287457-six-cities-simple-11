@@ -31,12 +31,13 @@ function Map({points, city, activeOffer}: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      points.forEach((point) => {
+      points.forEach((point: TOffer) => {
         const icon = activeOffer && point.id === activeOffer.id ? activeCustomIcon : defaultCustomIcon;
+        const {latitude, longitude} = point.location;
         leaflet
           .marker({
-            lat: point.coords.lat,
-            lng: point.coords.lon
+            lat: latitude,
+            lng: longitude
           })
           .setIcon(icon)
           .addTo(map);

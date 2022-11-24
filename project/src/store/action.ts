@@ -2,10 +2,8 @@ import {createAction} from '@reduxjs/toolkit';
 import {TCity} from '../types/city';
 import {TOffer} from '../types/offers';
 
-export const setCity = createAction('offers/setCity', (value: TCity) => ({
-  payload: value,
-}));
+export const setCity = createAction<TCity>('offers/setCity');
 
-export const setOffers = createAction('offers/setOffers', (value: TOffer[]) => ({
-  payload: value,
-}));
+export const loadOffers = createAction<TOffer[]>('offers/loadOffers');
+
+export const setLoadingOffersStatus = createAction<boolean>('offers/setLoadingOffersStatus');

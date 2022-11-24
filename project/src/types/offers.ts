@@ -1,28 +1,37 @@
 export type THost = {
+  avatarUrl: string;
+  id: number;
+  isPro: boolean;
   name: string;
-  status: string;
-  avatar: string;
 }
 
-export type TCoords = {
-  lat: number;
-  lon: number;
+export type TLocation = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
 }
 
 export type TOffer = {
+  bedrooms: number;
+  city: {
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+    name: string;
+  };
+  description: string;
+  goods: string[];
+  host: THost;
   id: number;
+  images: string[];
   isPremium: boolean;
-  mainImage: string;
+  location: TLocation;
+  maxAdults: number;
+  previewImage: string;
   price: number;
   rating: number;
-  name: string;
+  title: string;
   type: string;
-  bedrooms: number;
-  maxAdults: number;
-  inside: string[];
-  host: THost;
-  description: string;
-  images: string[];
-  coords: TCoords;
-  city: string;
 }
