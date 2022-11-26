@@ -19,4 +19,6 @@ export const START_CITY = 'Paris';
 
 export enum APIRoute {
   Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
 }

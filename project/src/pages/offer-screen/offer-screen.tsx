@@ -25,7 +25,7 @@ function OfferScreen({reviews}: OfferProps): JSX.Element {
   const offerReviews = reviews.filter((item) => item.offerId.toString() === params.id);
   return (
     <div className="page">
-      <Header showNav/>
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
