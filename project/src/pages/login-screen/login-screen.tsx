@@ -8,7 +8,7 @@ function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  
+
   const onSubmit = (authData: TAuth) => {
     dispatch(loginUser(authData));
   };
@@ -17,9 +17,9 @@ function LoginScreen(): JSX.Element {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
       onSubmit({
-        email: loginRef.current.value, 
+        email: loginRef.current.value,
         password: passwordRef.current.value
-      })
+      });
     }
   };
 
