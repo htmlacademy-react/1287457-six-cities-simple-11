@@ -1,48 +1,61 @@
 import {TCity} from '../types/city';
 
 export const defaultCity: TCity = {
+  location: {
+    latitude: 52.37022,
+    longitude: 4.89517,
+    zoom: 10,
+  },
   name: 'Amsterdam',
-  zoom: 10,
-  lat: 52.37022,
-  lon: 4.89517,
 };
 
 export const cities: TCity[] = [
   {
+    location: {
+      latitude: 48.8534,
+      longitude: 2.3488,
+      zoom: 10,
+    },
     name: 'Paris',
-    zoom: 10,
-    lat: 48.8534,
-    lon: 2.3488,
   },
   {
+    location: {
+      latitude: 50.9333,
+      longitude: 6.95,
+      zoom: 10,
+    },
     name: 'Cologne',
-    zoom: 10,
-    lat: 50.9333,
-    lon: 6.95,
   },
   {
+    location: {
+      latitude: 50.8504,
+      longitude: 4.34878,
+      zoom: 10,
+    },
     name: 'Brussels',
-    zoom: 10,
-    lat: 50.8504,
-    lon: 4.34878,
   },
   {
+    location: {
+      latitude: 52.37022,
+      longitude: 4.89517,
+      zoom: 10,
+    },
     name: 'Amsterdam',
-    zoom: 10,
-    lat: 52.37022,
-    lon: 4.89517,
   },
   {
+    location: {
+      latitude: 53.5753,
+      longitude: 10.0153,
+      zoom: 10,
+    },
     name: 'Hamburg',
-    zoom: 10,
-    lat: 53.5753,
-    lon: 10.0153,
-  }
-  ,
+  },
   {
+    location: {
+      latitude: 51.22774,
+      longitude: 6.77346,
+      zoom: 10,
+    },
     name: 'Dusseldorf',
-    zoom: 10,
-    lat: 51.22774,
-    lon: 6.77346,
-  }
+  },
 ];

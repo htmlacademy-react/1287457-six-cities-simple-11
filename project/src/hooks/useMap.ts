@@ -8,14 +8,14 @@ import {LEAFLET_TILE_LAYER, LEAFLET_COPYRIGHT} from '../const';
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: TCity) {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
-  const {lat, lon, zoom} = city;
+  const {latitude, longitude, zoom} = city.location;
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat: lat,
-          lng: lon,
+          lat: latitude,
+          lng: longitude,
         },
         zoom: zoom,
       });

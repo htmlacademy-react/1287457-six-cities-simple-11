@@ -39,7 +39,7 @@ function Main({city, offers}: MainProps): JSX.Element {
         <List offers={offers} mouseOverHandler={handleActiveOffer} />
       </section>
       <div className="cities__right-section">
-        <Map activeOffer={activeOffer} city={city} points={offers} />
+        <Map activeOffer={activeOffer} city={city} points={offers} classPrefix={'cities'}/>
       </div>
     </div>
   );

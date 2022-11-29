@@ -1,12 +1,12 @@
 import Logo from '../logo/logo';
 import HeaderNav from '../header-nav/header-nav';
+import {useLocation} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
-type HeaderProps = {
-  logoActive?: boolean;
-  showNav?: boolean;
-}
-
-function Header({logoActive, showNav}: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
+  const location = useLocation();
+  const path = location.pathname;
+  const logoActive = path === AppRoute.Root;
   return (
     <header className="header">
       <div className="container">
@@ -14,7 +14,7 @@ function Header({logoActive, showNav}: HeaderProps): JSX.Element {
           <div className="header__left">
             <Logo logoActive={logoActive}/>
           </div>
-          {showNav ? <HeaderNav /> : ''}
+          {path !== AppRoute.Login ? <HeaderNav /> : null}
         </div>
       </div>
     </header>

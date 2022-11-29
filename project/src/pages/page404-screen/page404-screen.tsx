@@ -5,7 +5,7 @@ function Page404Screen(): JSX.Element {
 
   return (
     <div className="page page--gray">
-      <Header showNav/>
+      <Header />
 
       <main className="page__main" style={{textAlign: 'center'}}>
         <h1>Страница не найдена</h1>

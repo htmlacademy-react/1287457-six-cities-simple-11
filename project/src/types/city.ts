@@ -1,6 +1,10 @@
-export type TCity = {
-  name: string;
+export type TLocation = {
+  latitude: number;
+  longitude: number;
   zoom: number;
-  lat: number;
-  lon: number;
+}
+
+export type TCity = {
+  location: TLocation;
+  name: string;
 }
