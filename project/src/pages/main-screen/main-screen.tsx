@@ -27,6 +27,7 @@ function MainScreen(): JSX.Element {
   }
 
   return (
+
     <div className="page page--gray page--main">
       <Header />
       <main className={`page__main page__main--index ${!offers.length ? 'page__main--index-empty' : ''}`}>

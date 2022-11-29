@@ -21,10 +21,11 @@ const activeCustomIcon = leaflet.icon({
 type MapProps = {
   points: TOffer[];
   city: TCity;
+  classPrefix: string;
   activeOffer?: TOffer;
 }
 
-function Map({points, city, activeOffer}: MapProps): JSX.Element {
+function Map({points, city, activeOffer, classPrefix}: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -47,13 +48,13 @@ function Map({points, city, activeOffer}: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      map.flyTo({lat: city.lat, lng: city.lon});
+      map.flyTo({lat: city.location.latitude, lng: city.location.longitude});
     }
   }, [city]);
 
   return (
     <section
-      className='cities__map map'
+      className={`${classPrefix}__map map`}
       ref={mapRef}
     >
     </section>

@@ -1,25 +1,33 @@
+import {useState} from 'react';
 import Header from '../../components/header/header';
 import {useParams} from 'react-router-dom';
 import {TOffer} from '../../types/offers';
 import {TReview} from '../../types/review';
 import Page404Screen from '../../pages/page404-screen/page404-screen';
-import AddCommentForm from '../../components/add-comment-form/add-comment-form';
-import Review from '../../components/review/review';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import NeighbourhoodOffers from '../../components/neighbourhood-offers/neighbourhood-offers';
 import {formatRating, addSIfNeeded} from '../../common';
 import {useAppSelector} from '../../hooks/index';
+import {nearOffers} from '../../mocks/near-offers';
+import Map from '../../components/map/map';
 
 type OfferProps = {
   reviews: TReview[];
 }
 
 function OfferScreen({reviews}: OfferProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<TOffer| undefined>();
+  const handleActiveOffer = (actOffer: TOffer | undefined): void => {
+    setActiveOffer(actOffer);
+  };
+
   const params = useParams();
   const offers: TOffer[] = useAppSelector((state) => state.currentCityOffers);
   const offer = offers.find((item) => item.id.toString() === params.id);
   if (!offer) {
     return <Page404Screen />;
   }
-  const {isPremium, price, rating, title, type, bedrooms, maxAdults, images, goods, host, description} = offer;
+  const {isPremium, price, rating, title, type, bedrooms, maxAdults, images, goods, host, description, city} = offer;
   const {name: hostName, avatarUrl, isPro} = host;
 
   const offerReviews = reviews.filter((item) => item.offerId.toString() === params.id);
@@ -101,108 +109,15 @@ function OfferScreen({reviews}: OfferProps): JSX.Element {
                 </div>
                 <div className="property__description" dangerouslySetInnerHTML={{ __html: description }} />
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span></h2>
-                {offerReviews ?
-                  <ul className="reviews__list">
-                    {offerReviews.map((review) => (
-                      <Review key={review.id} review={review} />
-                    ))}
-                  </ul>
-                  : null}
-                <AddCommentForm />
-              </section>
+              <ReviewsList reviews={offerReviews}/>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map activeOffer={activeOffer} city={city} points={nearOffers} classPrefix={'property'}/>
         </section>
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
-                  </a>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;80</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <a href="#">Wood and stone place</a>
-                  </h2>
-                  <p className="place-card__type">Private room</p>
-                </div>
-              </article>
-
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
-                  </a>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;132</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <a href="#">Canal View Prinsengracht</a>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-
-              <article className="near-places__card place-card">
-                <div className="place-card__mark">
-                  <span>Premium</span>
-                </div>
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image" />
-                  </a>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;180</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '100%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <a href="#">Nice, cozy, warm big bed apartment</a>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-            </div>
-          </section>
-        </div>
+        {nearOffers ?
+          <NeighbourhoodOffers offers={nearOffers} mouseOverHandler={handleActiveOffer}/>
+          :
+          null}
       </main>
     </div>
   );

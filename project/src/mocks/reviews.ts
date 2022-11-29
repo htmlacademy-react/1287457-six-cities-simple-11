@@ -3,7 +3,7 @@ import {TReview} from '../types/review';
 export const reviews: TReview[] = [
   {
     id: 1,
-    offerId: 1,
+    offerId: 20,
     user: {
       name: 'Max',
       avatar: 'img/avatar-max.jpg',
@@ -14,7 +14,7 @@ export const reviews: TReview[] = [
   },
   {
     id: 2,
-    offerId: 1,
+    offerId: 20,
     user: {
       name: 'Angelina',
       avatar: 'img/avatar-angelina.jpg',
@@ -25,7 +25,7 @@ export const reviews: TReview[] = [
   },
   {
     id: 3,
-    offerId: 1,
+    offerId: 20,
     user: {
       name: 'Max',
       avatar: 'img/avatar-max.jpg',
@@ -36,7 +36,7 @@ export const reviews: TReview[] = [
   },
   {
     id: 4,
-    offerId: 2,
+    offerId: 20,
     user: {
       name: 'Max',
       avatar: 'img/avatar-max.jpg',

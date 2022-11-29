@@ -6,19 +6,20 @@ import {formatRating} from '../../common';
 type ListItemProps = {
   offer: TOffer;
   mouseOverHandler: (offer?: TOffer) => void;
+  classPrefix: string;
 }
 
-function ListItem({offer, mouseOverHandler}: ListItemProps): JSX.Element {
+function ListItem({offer, mouseOverHandler, classPrefix}: ListItemProps): JSX.Element {
   const {id, isPremium, images, price, rating, title, type} = offer;
 
   return (
-    <article key={id} className="cities__card place-card" onMouseOver={() => mouseOverHandler(offer)} onMouseOut={() => mouseOverHandler()}>
+    <article key={id} className={`${classPrefix}__card place-card`} onMouseOver={() => mouseOverHandler(offer)} onMouseOut={() => mouseOverHandler()}>
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
         : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${classPrefix}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image" />
         </Link>
