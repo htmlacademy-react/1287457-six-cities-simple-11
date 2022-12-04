@@ -22,3 +22,12 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export enum SortType {
+  Popular = 'Popular',
+  PriceUp = 'Price: low to high',
+  PriceDown = 'Price: high to low',
+  TopRated = 'Top rated first'
+}
+
+export const SORT_TYPES = Object.values(SortType);
