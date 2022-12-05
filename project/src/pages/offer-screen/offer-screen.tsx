@@ -1,36 +1,45 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Header from '../../components/header/header';
 import {useParams} from 'react-router-dom';
 import {TOffer} from '../../types/offers';
-import {TReview} from '../../types/review';
 import Page404Screen from '../../pages/page404-screen/page404-screen';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NeighbourhoodOffers from '../../components/neighbourhood-offers/neighbourhood-offers';
 import {formatRating, addSIfNeeded} from '../../common';
-import {useAppSelector} from '../../hooks/index';
-import {nearOffers} from '../../mocks/near-offers';
+import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import Map from '../../components/map/map';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import {loadOfferAction, loadReviewsAction, loadNearbyOffersAction} from '../../store/api-action';
 
-type OfferProps = {
-  reviews: TReview[];
-}
-
-function OfferScreen({reviews}: OfferProps): JSX.Element {
+function OfferScreen(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<TOffer| undefined>();
   const handleActiveOffer = (actOffer: TOffer | undefined): void => {
     setActiveOffer(actOffer);
   };
+  const dispatch = useAppDispatch();
+  const {currentOffer, isOfferLoaded, reviews, nearbyOffers} = useAppSelector((state) => state);
+  const {id} = useParams();
+  const numbId = Number(id);
+  {/* из useParams id приходит в виде строки. можно ли преобразовать его в число налету без использования дополнительной переменной? */}
 
-  const params = useParams();
-  const offers: TOffer[] = useAppSelector((state) => state.currentCityOffers);
-  const offer = offers.find((item) => item.id.toString() === params.id);
-  if (!offer) {
+  useEffect(() => {
+    dispatch(loadOfferAction(numbId));
+    dispatch(loadReviewsAction(numbId));
+    dispatch(loadNearbyOffersAction(numbId));
+  }, [id]);
+
+  if (isOfferLoaded === undefined) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  if (!currentOffer) {
     return <Page404Screen />;
   }
-  const {isPremium, price, rating, title, type, bedrooms, maxAdults, images, goods, host, description, city} = offer;
+  const {isPremium, price, rating, title, type, bedrooms, maxAdults, images, goods, host, description, city} = currentOffer;
   const {name: hostName, avatarUrl, isPro} = host;
 
-  const offerReviews = reviews.filter((item) => item.offerId.toString() === params.id);
   return (
     <div className="page">
       <Header />
@@ -109,13 +118,13 @@ function OfferScreen({reviews}: OfferProps): JSX.Element {
                 </div>
                 <div className="property__description" dangerouslySetInnerHTML={{ __html: description }} />
               </div>
-              <ReviewsList reviews={offerReviews}/>
+              <ReviewsList reviews={reviews}/>
             </div>
           </div>
-          <Map activeOffer={activeOffer} city={city} points={nearOffers} classPrefix={'property'}/>
+          <Map activeOffer={activeOffer} city={city} points={nearbyOffers} classPrefix={'property'}/>
         </section>
-        {nearOffers ?
-          <NeighbourhoodOffers offers={nearOffers} mouseOverHandler={handleActiveOffer}/>
+        {nearbyOffers ?
+          <NeighbourhoodOffers offers={nearbyOffers} mouseOverHandler={handleActiveOffer}/>
           :
           null}
       </main>

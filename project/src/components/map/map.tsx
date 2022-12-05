@@ -29,7 +29,7 @@ function Map({points, city, activeOffer, classPrefix}: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
-
+  {/* заметил что карта не перерисовывается - новые точки накладываются поверх старых. это не очень бросается в глаза на главной странице, но видно в карточке при переключении объявлений поблизости. как это пофиксить? */}
   useEffect(() => {
     if (map) {
       points.forEach((point: TOffer) => {
