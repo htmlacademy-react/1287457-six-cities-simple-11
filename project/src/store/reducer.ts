@@ -1,27 +1,36 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {cities} from '../mocks/cities';
-import {setCity, loadOffers, setLoadingOffersStatus, setAuthorizationStatus, setUser} from './action';
+import {setCity, loadOffers, loadOffer, setLoadingOffersStatus, setLoadingOfferStatus, setAuthorizationStatus, setUser, loadNearbyOffers, loadReviews} from './action';
 import {TOffer} from '../types/offers';
 import {TCity} from '../types/city';
 import {TUser} from '../types/user';
+import {TReview} from '../types/review';
 import {getOffersByCity} from '../common';
 
 type InitalState = {
   city: TCity;
   offers: TOffer[];
   currentCityOffers: TOffer[];
+  currentOffer: TOffer | null;
   isOffersLoaded: boolean;
+  isOfferLoaded: boolean | undefined;
   authorizationStatus: boolean;
   user: TUser | null;
+  nearbyOffers: TOffer[];
+  reviews: TReview[];
 }
 
 const initialState: InitalState = {
   city: cities[0],
   offers: [],
   currentCityOffers: [],
+  currentOffer: null,
   isOffersLoaded: false,
+  isOfferLoaded: undefined,
   authorizationStatus: false,
   user: null,
+  nearbyOffers: [],
+  reviews: [],
 };
 
 type actionTypeCity = {
@@ -30,6 +39,10 @@ type actionTypeCity = {
 
 type actionTypeOffers = {
   payload: TOffer[];
+};
+
+type actionTypeOffer = {
+  payload: TOffer;
 };
 
 type actionTypeLoadingStatus = {
@@ -43,6 +56,15 @@ type actionTypeAuthorizationStatus = {
 type actionTypeUser = {
   payload: TUser | null;
 };
+
+type actionTypeLoadNearbyOffers = {
+  payload: TOffer[];
+};
+
+type actionTypeLoadReviews = {
+  payload: TReview[];
+};
+
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
@@ -62,5 +84,17 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUser, (state, action: actionTypeUser) => {
       state.user = action.payload;
+    })
+    .addCase(loadOffer, (state, action: actionTypeOffer) => {
+      state.currentOffer = action.payload;
+    })
+    .addCase(setLoadingOfferStatus, (state, action: actionTypeLoadingStatus) => {
+      state.isOfferLoaded = action.payload;
+    })
+    .addCase(loadNearbyOffers, (state, action: actionTypeLoadNearbyOffers) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(loadReviews, (state, action: actionTypeLoadReviews) => {
+      state.reviews = action.payload;
     });
 });

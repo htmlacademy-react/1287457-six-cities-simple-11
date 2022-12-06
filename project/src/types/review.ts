@@ -1,13 +1,14 @@
-export type TUser = {
+export type TReviewUser = {
+  avatarUrl: string;
+  id: number;
+  isPro: boolean;
   name: string;
-  avatar: string;
 }
 
 export type TReview = {
-  id: number;
-  offerId: number;
   comment: string;
   date: string;
+  id: number;
   rating: number;
-  user: TUser;
+  user: TReviewUser;
 }

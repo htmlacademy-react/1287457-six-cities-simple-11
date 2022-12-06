@@ -8,9 +8,12 @@ type SortItemProps = {
 }
 
 function SortItem({activeSortItem, sortItem, setActiveSortItem, clickHandler}: SortItemProps): JSX.Element {
-
+  const changeHandler = () => {
+    setActiveSortItem(sortItem);
+    clickHandler();
+  };
   return (
-    <li className={`places__option ${activeSortItem === sortItem ? 'places__option--active' : ''}`} onClick={() => {setActiveSortItem(sortItem); clickHandler();}} tabIndex={0}>{sortItem}</li>
+    <li className={`places__option ${activeSortItem === sortItem ? 'places__option--active' : ''}`} onClick={() => {changeHandler();}} tabIndex={0}>{sortItem}</li>
   );
 }
 
