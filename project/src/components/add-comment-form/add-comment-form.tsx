@@ -29,7 +29,12 @@ function AddCommentForm(): JSX.Element {
   };
   {/* при выполнении этой функции звездочки рейтинга не перекрашиваются в серый, хотя в state видно, что rating стан 0. в чем ошибка? */}
 
-  const changeHandler = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const ratingChangeHandler = (evt: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = evt.target;
+    setFormData({...formData, [name]: Number(value)});
+  };
+
+  const commentChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
     setFormData({...formData, [name]: value});
   };
@@ -60,11 +65,11 @@ function AddCommentForm(): JSX.Element {
         {ratingTitles.map((title, index, array) => {
           const value = array.length - index;
           return (
-            <RatingStar key={value} value={value} title={title} changeHandler={changeHandler} />
+            <RatingStar key={value} value={value} title={title} changeHandler={ratingChangeHandler} rating={formData.rating}/>
           );
         })}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={changeHandler} value={formData.review}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={commentChangeHandler} value={formData.review}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} {addSIfNeeded(MIN_REVIEW_LENGTH, 'character')}</b>.

@@ -20,7 +20,6 @@ function OfferScreen(): JSX.Element {
   const {currentOffer, isOfferLoaded, reviews, nearbyOffers} = useAppSelector((state) => state);
   const {id} = useParams();
   const numbId = Number(id);
-  {/* из useParams id приходит в виде строки. можно ли преобразовать его в число налету без использования дополнительной переменной? */}
 
   useEffect(() => {
     dispatch(loadOfferAction(numbId));
@@ -28,7 +27,7 @@ function OfferScreen(): JSX.Element {
     dispatch(loadNearbyOffersAction(numbId));
   }, [id]);
 
-  if (isOfferLoaded === undefined) {
+  if (!isOfferLoaded) {
     return (
       <LoadingScreen />
     );
