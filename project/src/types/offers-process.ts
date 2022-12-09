@@ -7,7 +7,7 @@ export type OffersProcess = {
   offers: Offer[];
   currentCityOffers: Offer[];
   currentOffer: Offer | null;
-  currentSortType: typeof SORT_TYPES[number],
+  currentSortType: typeof SORT_TYPES[number];
   isOffersLoaded: boolean;
   isOfferLoaded: boolean;
   nearbyOffers: Offer[];
