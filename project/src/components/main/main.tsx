@@ -3,9 +3,8 @@ import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import {useState} from 'react';
 import {Offer} from '../../types/offer';
-import {addSIfNeeded, sort} from '../../common';
+import {addSIfNeeded} from '../../common';
 import {City} from '../../types/city';
-import {SORT_TYPES} from '../../const';
 
 type MainProps = {
   city: City;
