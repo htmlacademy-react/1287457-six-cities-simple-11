@@ -1,17 +1,17 @@
-export type THost = {
+type Host = {
   avatarUrl: string;
   id: number;
   isPro: boolean;
   name: string;
 }
 
-export type TLocation = {
+type Location = {
   latitude: number;
   longitude: number;
   zoom: number;
 }
 
-export type TOffer = {
+export type Offer = {
   bedrooms: number;
   city: {
     location: {
@@ -23,11 +23,11 @@ export type TOffer = {
   };
   description: string;
   goods: string[];
-  host: THost;
+  host: Host;
   id: number;
   images: string[];
   isPremium: boolean;
-  location: TLocation;
+  location: Location;
   maxAdults: number;
   previewImage: string;
   price: number;

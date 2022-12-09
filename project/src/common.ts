@@ -1,5 +1,5 @@
 import {months, SORT_TYPES, SortType} from './const';
-import {TOffer} from './types/offers';
+import {Offer} from './types/offer';
 
 export const formatRating = function(rating: number): string {
   return `${Math.floor(rating) * 20}%`;
@@ -14,11 +14,11 @@ export const formatDate = function(date: string): string {
   return `${months[Number(month) - 1]} ${year}`;
 };
 
-export const getOffersByCity = function(city: string, offers: TOffer[]): TOffer[] {
+export const getOffersByCity = function(city: string, offers: Offer[]): Offer[] {
   return offers.filter((item) => item.city.name === city);
 };
 
-export const sort = function(offers: TOffer[], activeSortItem: typeof SORT_TYPES[number]): TOffer[] {
+export const sort = function(offers: Offer[], activeSortItem: typeof SORT_TYPES[number]): Offer[] {
   const sortedOffers = [...offers];
   switch (activeSortItem) {
     case SortType.PriceUp:

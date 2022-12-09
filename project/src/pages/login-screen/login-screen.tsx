@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import {useRef, FormEvent} from 'react';
 import {useAppDispatch} from '../../hooks';
-import {TAuth} from '../../types/auth';
+import {Auth} from '../../types/auth';
 import {loginUser} from '../../store/api-action';
 
 function LoginScreen(): JSX.Element {
@@ -9,7 +9,7 @@ function LoginScreen(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
 
-  const onSubmit = (authData: TAuth) => {
+  const onSubmit = (authData: Auth) => {
     dispatch(loginUser(authData));
   };
 

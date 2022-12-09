@@ -32,3 +32,9 @@ export enum SortType {
 }
 
 export const SORT_TYPES = Object.values(SortType);
+
+export enum NameSpace {
+  Offers = 'OFFERS',
+  User = 'USER',
+  Reviews = 'REVIEWS',
+}

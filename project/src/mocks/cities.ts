@@ -1,6 +1,6 @@
-import {TCity} from '../types/city';
+import {City} from '../types/city';
 
-export const defaultCity: TCity = {
+export const defaultCity: City = {
   location: {
     latitude: 52.37022,
     longitude: 4.89517,
@@ -9,7 +9,7 @@ export const defaultCity: TCity = {
   name: 'Amsterdam',
 };
 
-export const cities: TCity[] = [
+export const cities: City[] = [
   {
     location: {
       latitude: 48.8534,

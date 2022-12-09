@@ -2,10 +2,11 @@ import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {logoutUser} from '../../store/api-action';
+import {getAuthorizationStatus, getUser} from '../../store/user-process/selectors';
 
 function HeaderNav(): JSX.Element {
-  const isUserLogged = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const isUserLogged = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
 
   return (

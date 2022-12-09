@@ -1,10 +1,10 @@
 import {useEffect, useRef} from 'react';
 import {Icon, Marker, LayerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {TCity} from '../../types/city';
+import {City} from '../../types/city';
 import useMap from '../../hooks/useMap';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
-import {TOffer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
@@ -19,10 +19,10 @@ const activeCustomIcon = new Icon({
 });
 
 type MapProps = {
-  points: TOffer[];
-  city: TCity;
+  points: Offer[];
+  city: City;
   classPrefix: string;
-  activeOffer?: TOffer;
+  activeOffer?: Offer;
 }
 
 function Map({points, city, activeOffer, classPrefix}: MapProps): JSX.Element {
@@ -33,7 +33,7 @@ function Map({points, city, activeOffer, classPrefix}: MapProps): JSX.Element {
   useEffect(() => {
     const newLayer: LayerGroup = new LayerGroup();
     if (map) {
-      points.forEach((point: TOffer) => {
+      points.forEach((point: Offer) => {
         const icon = activeOffer && point.id === activeOffer.id ? activeCustomIcon : defaultCustomIcon;
         const {latitude, longitude} = point.location;
         const marker = new Marker({

@@ -1,6 +1,6 @@
-import {TOffer} from '../types/offers';
+import {Offer} from '../types/offer';
 
-export const nearOffers: TOffer[] = [
+export const nearOffers: Offer[] = [
   {
     'bedrooms': 3,
     'city': {
