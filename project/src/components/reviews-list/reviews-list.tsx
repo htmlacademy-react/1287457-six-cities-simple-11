@@ -1,14 +1,15 @@
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import Review from '../../components/review/review';
-import {TReview} from '../../types/review';
+import {ReviewType} from '../../types/review-type';
 import {useAppSelector} from '../../hooks/index';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 type ReviewsListProps = {
-  reviews: TReview[];
+  reviews: ReviewType[];
 }
 
 function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>

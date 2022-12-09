@@ -1,11 +1,11 @@
-import {TOffer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {formatRating} from '../../common';
 
 type ListItemProps = {
-  offer: TOffer;
-  mouseOverHandler: (offer?: TOffer) => void;
+  offer: Offer;
+  mouseOverHandler: (offer?: Offer) => void;
   classPrefix: string;
 }
 

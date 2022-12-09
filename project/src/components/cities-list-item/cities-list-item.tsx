@@ -1,10 +1,10 @@
 import {MouseEvent} from 'react';
-import {setCity} from '../../store/action';
+import {setCity} from '../../store/offers-process/offers-process';
 import {useAppDispatch} from '../../hooks/index';
-import {TCity} from '../../types/city';
+import {City} from '../../types/city';
 
 type CitiesListItemProps = {
-  city: TCity;
+  city: City;
   isActive?: boolean;
 }
 

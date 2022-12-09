@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import Header from '../../components/header/header';
 import {useParams} from 'react-router-dom';
-import {TOffer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 import Page404Screen from '../../pages/page404-screen/page404-screen';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NeighbourhoodOffers from '../../components/neighbourhood-offers/neighbourhood-offers';
@@ -9,23 +9,29 @@ import {formatRating, addSIfNeeded} from '../../common';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import Map from '../../components/map/map';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import {loadOfferAction, loadReviewsAction, loadNearbyOffersAction} from '../../store/api-action';
+import {loadCurrentOffer, loadReviews, loadNearbyOffers} from '../../store/api-action';
+import {getCurrentOffer, getOfferLoadingStatus, getNearbyOffers} from '../../store/offers-process/selectors';
+import {getReviews} from '../../store/reviews-process/selectors';
 
 function OfferScreen(): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<TOffer| undefined>();
-  const handleActiveOffer = (actOffer: TOffer | undefined): void => {
+  const [activeOffer, setActiveOffer] = useState<Offer| undefined>();
+  const handleActiveOffer = (actOffer: Offer | undefined): void => {
     setActiveOffer(actOffer);
   };
   const dispatch = useAppDispatch();
-  const {currentOffer, isOfferLoaded, reviews, nearbyOffers} = useAppSelector((state) => state);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const isOfferLoaded = useAppSelector(getOfferLoadingStatus);
+  const reviews = useAppSelector(getReviews);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+
   const {id} = useParams();
   const numbId = Number(id);
 
   useEffect(() => {
-    dispatch(loadOfferAction(numbId));
-    dispatch(loadReviewsAction(numbId));
-    dispatch(loadNearbyOffersAction(numbId));
-  }, [id]);
+    dispatch(loadCurrentOffer(numbId));
+    dispatch(loadReviews(numbId));
+    dispatch(loadNearbyOffers(numbId));
+  }, [numbId]);
 
   if (!isOfferLoaded) {
     return (

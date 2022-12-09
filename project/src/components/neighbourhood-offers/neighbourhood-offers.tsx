@@ -1,9 +1,9 @@
 import ListItem from '../../components/listitem/listitem';
-import {TOffer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 
 type NeighbourhoodOffersProps = {
-  offers: TOffer[];
-  mouseOverHandler: (offer: TOffer | undefined) => void;
+  offers: Offer[];
+  mouseOverHandler: (offer: Offer | undefined) => void;
 }
 
 function NeighbourhoodOffers({offers, mouseOverHandler}: NeighbourhoodOffersProps): JSX.Element {

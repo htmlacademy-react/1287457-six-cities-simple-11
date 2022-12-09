@@ -4,16 +4,20 @@ import CitiesList from '../../components/cities-list/cities-list';
 import MainEmpty from '../../components/main-empty/main-empty';
 import Main from '../../components/main/main';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
-import {loadOffersAction} from '../../store/api-action';
+import {loadOffers} from '../../store/api-action';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import {getCity, getOffersLoadingStatus, getCurrentCitySortedOffers} from '../../store/offers-process/selectors';
 
 function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const {isOffersLoaded, city, currentCityOffers} = useAppSelector((state) => state);
+  const isOffersLoaded = useAppSelector(getOffersLoadingStatus);
+  const city = useAppSelector(getCity);
+  const currentCityOffers = useAppSelector(getCurrentCitySortedOffers);
+
   const {name: cityName} = city;
 
   useEffect(() => {
-    dispatch(loadOffersAction());
+    dispatch(loadOffers());
   }, []);
 
   if (!isOffersLoaded) {

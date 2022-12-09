@@ -4,7 +4,7 @@ import {FormEvent} from 'react';
 import {addSIfNeeded} from '../../common';
 import {addReview} from '../../store/api-action';
 import {useAppDispatch} from '../../hooks';
-import {TComment} from '../../types/comment';
+import {Comment} from '../../types/comment';
 import {useParams} from 'react-router-dom';
 
 function AddCommentForm(): JSX.Element {
@@ -12,7 +12,7 @@ function AddCommentForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const {id} = useParams();
 
-  const onSubmit = (reviewData: TComment) => {
+  const onSubmit = (reviewData: Comment) => {
     dispatch(addReview(reviewData));
   };
 
@@ -27,7 +27,6 @@ function AddCommentForm(): JSX.Element {
       review: '',
     });
   };
-  {/* при выполнении этой функции звездочки рейтинга не перекрашиваются в серый, хотя в state видно, что rating стан 0. в чем ошибка? */}
 
   const ratingChangeHandler = (evt: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = evt.target;
