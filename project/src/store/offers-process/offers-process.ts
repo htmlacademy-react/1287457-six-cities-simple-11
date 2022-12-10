@@ -1,10 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {NameSpace, SortType, SORT_TYPES} from '../../const';
+import {NameSpace, SortType, SORT_TYPES, AppRoute} from '../../const';
 import {cities} from '../../mocks/cities';
 import {loadOffers, loadCurrentOffer, loadNearbyOffers} from '../api-action';
 import {getOffersByCity} from '../../common';
 import {City} from '../../types/city';
 import {OffersProcess} from '../../types/offers-process';
+import browserHistory from '../../browser-history';
 
 const initialState: OffersProcess = {
   city: cities[0],
@@ -36,9 +37,18 @@ export const offersProcess = createSlice({
         state.isOffersLoaded = true;
         state.currentCityOffers = getOffersByCity(state.city.name, action.payload);
       })
+      .addCase(loadOffers.rejected, (state) => {
+        state.offers = [];
+        state.isOffersLoaded = true;
+        state.currentCityOffers = [];
+      })
       .addCase(loadCurrentOffer.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
         state.isOfferLoaded = true;
+      })
+      .addCase(loadCurrentOffer.rejected, (state) => {
+        state.currentOffer = null;
+        browserHistory.push(AppRoute.Page404);
       })
       .addCase(loadNearbyOffers.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
