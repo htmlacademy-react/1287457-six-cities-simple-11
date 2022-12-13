@@ -1,4 +1,4 @@
-import {cities} from '../../mocks/cities';
+import {cities} from '../../const';
 import CitiesListItem from '../../components/cities-list-item/cities-list-item';
 
 type CitiesListProps = {

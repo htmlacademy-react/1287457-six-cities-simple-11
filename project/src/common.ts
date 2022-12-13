@@ -1,5 +1,6 @@
 import {months, SORT_TYPES, SortType} from './const';
 import {Offer} from './types/offer';
+import {ReviewType} from './types/review-type';
 
 export const formatRating = function(rating: number): string {
   return `${Math.floor(rating) * 20}%`;
@@ -32,4 +33,10 @@ export const sort = function(offers: Offer[], activeSortItem: typeof SORT_TYPES[
       break;
   }
   return sortedOffers;
+};
+
+export const sortReviewsByDate = function(reviews: ReviewType[]): ReviewType[] {
+  const sortedReviews = [...reviews];
+  sortedReviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return sortedReviews;
 };

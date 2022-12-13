@@ -14,8 +14,9 @@ export const userProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkUserStatus.fulfilled, (state) => {
+      .addCase(checkUserStatus.fulfilled, (state, action) => {
         state.authorizationStatus = true;
+        state.user = action.payload;
       })
       .addCase(checkUserStatus.rejected, (state) => {
         state.authorizationStatus = false;
@@ -27,7 +28,7 @@ export const userProcess = createSlice({
       .addCase(loginUser.rejected, (state) => {
         state.authorizationStatus = false;
       })
-      .addCase(logoutUser.fulfilled, (state, action) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.authorizationStatus = false;
         state.user = null;
       });

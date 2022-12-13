@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import Header from '../../components/header/header';
 import {useParams} from 'react-router-dom';
-import {Offer} from '../../types/offer';
 import Page404Screen from '../../pages/page404-screen/page404-screen';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import NeighbourhoodOffers from '../../components/neighbourhood-offers/neighbourhood-offers';
 import {formatRating, addSIfNeeded} from '../../common';
+import {MAX_OFFER_IMAGES} from '../../const';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import Map from '../../components/map/map';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
@@ -14,10 +14,6 @@ import {getCurrentOffer, getOfferLoadingStatus, getNearbyOffers} from '../../sto
 import {getReviews} from '../../store/reviews-process/selectors';
 
 function OfferScreen(): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<Offer| undefined>();
-  const handleActiveOffer = (actOffer: Offer | undefined): void => {
-    setActiveOffer(actOffer);
-  };
   const dispatch = useAppDispatch();
   const currentOffer = useAppSelector(getCurrentOffer);
   const isOfferLoaded = useAppSelector(getOfferLoadingStatus);
@@ -54,7 +50,7 @@ function OfferScreen(): JSX.Element {
           <div className="property__gallery-container container">
             {images ?
               <div className="property__gallery">
-                {images.map((image) => (
+                {images.slice(0, MAX_OFFER_IMAGES).map((image) => (
                   <div className="property__image-wrapper" key={image}>
                     <img className="property__image" src={image} alt="Photo studio" />
                   </div>
@@ -126,10 +122,10 @@ function OfferScreen(): JSX.Element {
               <ReviewsList reviews={reviews}/>
             </div>
           </div>
-          <Map activeOffer={activeOffer} city={city} points={nearbyOffers} classPrefix={'property'}/>
+          <Map activeOffer={currentOffer} city={city} points={[currentOffer, ...nearbyOffers]} classPrefix={'property'}/>
         </section>
         {nearbyOffers ?
-          <NeighbourhoodOffers offers={nearbyOffers} mouseOverHandler={handleActiveOffer}/>
+          <NeighbourhoodOffers offers={nearbyOffers} />
           :
           null}
       </main>

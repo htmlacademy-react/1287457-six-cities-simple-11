@@ -1,12 +1,11 @@
-import ListItem from '../../components/listitem/listitem';
+import ListItem from '../../components/list-item/list-item';
 import {Offer} from '../../types/offer';
 
 type NeighbourhoodOffersProps = {
   offers: Offer[];
-  mouseOverHandler: (offer: Offer | undefined) => void;
 }
 
-function NeighbourhoodOffers({offers, mouseOverHandler}: NeighbourhoodOffersProps): JSX.Element {
+function NeighbourhoodOffers({offers}: NeighbourhoodOffersProps): JSX.Element {
 
   return (
     <div className="container">
@@ -14,7 +13,7 @@ function NeighbourhoodOffers({offers, mouseOverHandler}: NeighbourhoodOffersProp
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
         <div className="near-places__list places__list">
           {offers.map((offer) => (
-            <ListItem key={offer.id} offer={offer} mouseOverHandler={mouseOverHandler} classPrefix={'near-places'}/>
+            <ListItem key={offer.id} offer={offer} classPrefix={'near-places'}/>
           ))}
         </div>
       </section>

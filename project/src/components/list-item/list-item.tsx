@@ -5,7 +5,7 @@ import {formatRating} from '../../common';
 
 type ListItemProps = {
   offer: Offer;
-  mouseOverHandler: (offer?: Offer) => void;
+  mouseOverHandler?: (offer?: Offer) => void;
   classPrefix: string;
 }
 
@@ -13,7 +13,12 @@ function ListItem({offer, mouseOverHandler, classPrefix}: ListItemProps): JSX.El
   const {id, isPremium, images, price, rating, title, type} = offer;
 
   return (
-    <article key={id} className={`${classPrefix}__card place-card`} onMouseOver={() => mouseOverHandler(offer)} onMouseOut={() => mouseOverHandler()}>
+    <article
+      key={id}
+      className={`${classPrefix}__card place-card`}
+      onMouseOver={() => mouseOverHandler?.(offer)}
+      onMouseOut={() => mouseOverHandler?.()}
+    >
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
