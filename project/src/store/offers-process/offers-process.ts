@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {NameSpace, SortType, SORT_TYPES, AppRoute} from '../../const';
-import {cities} from '../../mocks/cities';
+import {NameSpace, SortType, SORT_TYPES, AppRoute, cities} from '../../const';
 import {loadOffers, loadCurrentOffer, loadNearbyOffers} from '../api-action';
 import {getOffersByCity} from '../../common';
 import {City} from '../../types/city';

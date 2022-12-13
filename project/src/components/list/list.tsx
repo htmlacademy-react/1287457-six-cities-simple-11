@@ -1,4 +1,4 @@
-import ListItem from '../../components/listitem/listitem';
+import ListItem from '../../components/list-item/list-item';
 import {Offer} from '../../types/offer';
 
 type ListProps = {

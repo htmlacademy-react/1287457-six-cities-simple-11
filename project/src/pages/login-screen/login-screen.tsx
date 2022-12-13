@@ -3,6 +3,7 @@ import {useRef, FormEvent} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {Auth} from '../../types/auth';
 import {loginUser} from '../../store/api-action';
+import {PASSWORD_MASK} from '../../const';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -10,7 +11,9 @@ function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const onSubmit = (authData: Auth) => {
-    dispatch(loginUser(authData));
+    if (authData.password.match(PASSWORD_MASK)) {
+      dispatch(loginUser(authData));
+    }
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {

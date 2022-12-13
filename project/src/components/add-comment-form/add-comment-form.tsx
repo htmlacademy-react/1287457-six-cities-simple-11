@@ -2,13 +2,13 @@ import {useState, ChangeEvent} from 'react';
 import RatingStar from '../../components/rating-star/rating-star';
 import {FormEvent} from 'react';
 import {addSIfNeeded} from '../../common';
+import {ReviewOptions} from '../../const';
 import {addReview} from '../../store/api-action';
 import {useAppDispatch} from '../../hooks';
 import {Comment} from '../../types/comment';
 import {useParams} from 'react-router-dom';
 
 function AddCommentForm(): JSX.Element {
-  const MIN_REVIEW_LENGTH = 5;
   const dispatch = useAppDispatch();
   const {id} = useParams();
 
@@ -71,9 +71,9 @@ function AddCommentForm(): JSX.Element {
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={commentChangeHandler} value={formData.review}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} {addSIfNeeded(MIN_REVIEW_LENGTH, 'character')}</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewOptions.MinLength} {addSIfNeeded(ReviewOptions.MinLength, 'character')}</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={formData.review.length < MIN_REVIEW_LENGTH || !formData.rating}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={(formData.review.length < ReviewOptions.MinLength || formData.review.length > ReviewOptions.MaxLength) || !formData.rating}>Submit</button>
       </div>
     </form>
   );

@@ -10,14 +10,15 @@ import {redirectToRoute} from './action';
 import {APIRoute, AppRoute} from '../const';
 import {setToken, deleteToken} from '../services/token';
 
-export const checkUserStatus = createAsyncThunk<void, undefined, {
+export const checkUserStatus = createAsyncThunk<User, undefined, {
   dispatch: TAppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkStatus',
   async (_arg, {dispatch, extra: api}) => {
-    await api.get<User>(APIRoute.Login);
+    const {data} = await api.get<User>(APIRoute.Login);
+    return data;
   },
 );
 
