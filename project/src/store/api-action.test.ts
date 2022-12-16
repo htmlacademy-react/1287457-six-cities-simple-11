@@ -4,11 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createAPI} from '../services/api';
 import {State} from '../types/state.js';
-import {Offer} from '../types/offer';
 import {Auth} from '../types/auth';
-import {User} from '../types/user';
-import {ReviewType} from '../types/review-type';
-import {Comment} from '../types/comment';
 import {APIRoute} from '../const';
 import {checkUserStatus, loginUser, logoutUser, loadOffers, loadCurrentOffer, loadNearbyOffers, loadReviews, addReview} from './api-action';
 import {redirectToRoute} from './action';
@@ -42,7 +38,7 @@ describe('Async actions', () => {
         checkUserStatus.fulfilled.type
       ]);
     });
-    
+
     it('should dispatch loginUser when POST /login', async () => {
       const mockUser: Auth = {email: 'test@test.ru', password: '123456'};
 
@@ -67,7 +63,7 @@ describe('Async actions', () => {
       expect(Storage.prototype.setItem).toBeCalledTimes(1);
       expect(Storage.prototype.setItem).toBeCalledWith('six-cities-simple-token', 'token');
     });
-    
+
     it('should dispatch logoutUser when Delete /logout', async () => {
       mockAPI
         .onDelete(APIRoute.Logout)
@@ -225,41 +221,41 @@ describe('Async actions', () => {
     it('should dispatch loadCurrentOffer when GET /hotels/{hotelId}', async () => {
       const hotelId = 1;
       const mockOffer = {
-          'bedrooms': 3,
-          'city': {
-            'location': {
-              'latitude': 52.370216,
-              'longitude': 4.895168,
-              'zoom': 10
-            },
-            'name': 'Amsterdam'
-          },
-          'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-          'goods': [
-            'Heating'
-          ],
-          'host': {
-            'avatarUrl': 'img/1.png',
-            'id': 3,
-            'isPro': true,
-            'name': 'Angelina'
-          },
-          'id': 1,
-          'images': [
-            'https://11.react.pages.academy/static/hotel/6.jpg'
-          ],
-          'isPremium': false,
+        'bedrooms': 3,
+        'city': {
           'location': {
-            'latitude': 48.837610000000005,
-            'longitude': 2.364499,
-            'zoom': 8
+            'latitude': 52.370216,
+            'longitude': 4.895168,
+            'zoom': 10
           },
-          'maxAdults': 4,
-          'previewImage': 'https://11.react.pages.academy/static/hotel/6.jpg',
-          'price': 120,
-          'rating': 4.8,
-          'title': 'Beautiful & luxurious studio at great location',
-          'type': 'apartment'
+          'name': 'Amsterdam'
+        },
+        'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        'goods': [
+          'Heating'
+        ],
+        'host': {
+          'avatarUrl': 'img/1.png',
+          'id': 3,
+          'isPro': true,
+          'name': 'Angelina'
+        },
+        'id': 1,
+        'images': [
+          'https://11.react.pages.academy/static/hotel/6.jpg'
+        ],
+        'isPremium': false,
+        'location': {
+          'latitude': 48.837610000000005,
+          'longitude': 2.364499,
+          'zoom': 8
+        },
+        'maxAdults': 4,
+        'previewImage': 'https://11.react.pages.academy/static/hotel/6.jpg',
+        'price': 120,
+        'rating': 4.8,
+        'title': 'Beautiful & luxurious studio at great location',
+        'type': 'apartment'
       };
 
       mockAPI

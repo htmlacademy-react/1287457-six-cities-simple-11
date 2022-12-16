@@ -169,7 +169,7 @@ describe('Reducer: offersProcess', () => {
         city: cityMoscow,
         offers: offers,
         currentCityOffers: offersMoscow,
-      }); 
+      });
   });
 
   it('should replace currentSortType with a given value', () => {
@@ -215,7 +215,7 @@ describe('Reducer: offersProcess', () => {
         isOffersLoaded: true,
       });
   });
-  
+
   it('should update nearby offers by load nearby offers', () => {
     const state = {...emptyState};
     expect(offersProcess.reducer(state, {type: loadNearbyOffers.fulfilled.type, payload: offers}))
