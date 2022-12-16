@@ -1,14 +1,23 @@
 import Header from '../../components/header/header';
-import {useRef, FormEvent} from 'react';
-import {useAppDispatch} from '../../hooks';
+import {useRef, FormEvent, MouseEvent} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {Auth} from '../../types/auth';
 import {loginUser} from '../../store/api-action';
-import {PASSWORD_MASK} from '../../const';
+import {redirectToRoute} from '../../store/action';
+import {PASSWORD_MASK, AppRoute} from '../../const';
+import {getRandomCity} from '../../common';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {Navigate} from 'react-router-dom';
+import {setCity} from '../../store/offers-process/offers-process';
 
 function LoginScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const dispatch = useAppDispatch();
+
+  const randomCity = getRandomCity();
 
   const onSubmit = (authData: Auth) => {
     if (authData.password.match(PASSWORD_MASK)) {
@@ -25,6 +34,16 @@ function LoginScreen(): JSX.Element {
       });
     }
   };
+
+  const handleCityClick = (evt: MouseEvent) => {
+    evt.preventDefault();
+    dispatch(setCity(randomCity));
+    dispatch(redirectToRoute(AppRoute.Root));
+  };
+
+  if (authorizationStatus) {
+    return <Navigate to={AppRoute.Root} />;
+  }
 
   return (
     <div className="page page--gray page--login">
@@ -48,8 +67,8 @@ function LoginScreen(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
+              <a onClick={handleCityClick} className="locations__item-link" href="#">
+                <span>{randomCity.name}</span>
               </a>
             </div>
           </section>
