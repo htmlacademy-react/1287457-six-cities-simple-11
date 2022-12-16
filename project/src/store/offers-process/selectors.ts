@@ -5,8 +5,6 @@ import {Offer} from '../../types/offer';
 import {City} from '../../types/city';
 import {sort} from '../../common';
 
-export const getOffers = (state: State): Offer[] => state[NameSpace.Offers].offers;
-
 export const getCurrentOffer = (state: State): Offer | null => state[NameSpace.Offers].currentOffer;
 
 export const getNearbyOffers = (state: State): Offer[] => state[NameSpace.Offers].nearbyOffers;

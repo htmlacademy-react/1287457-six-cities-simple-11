@@ -17,8 +17,6 @@ export const LEAFLET_TILE_LAYER = 'https://{s}.basemaps.cartocdn.com/rastertiles
 
 export const LEAFLET_COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-export const START_CITY = 'Paris';
-
 export enum APIRoute {
   Offers = '/hotels',
   Login = '/login',
